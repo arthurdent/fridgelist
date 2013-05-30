@@ -1,0 +1,43 @@
+@media (max-width: 767px) {
+	body {
+		margin:3px;
+		padding:1px;
+	}
+}
+@media (min-width: 767px) {
+	body {
+		margin: 25px;
+	}
+}
+
+.input-prepend {
+	display:table;
+	width:100%;
+	margin-bottom:15px;
+}
+
+#grocery-row {
+}
+
+#grocery-name {
+	vertical-align:middle;
+	display: table-cell;
+}
+
+#check-cell {
+	width:40px;
+}
+
+#modify-cell {
+	width:80px;
+}
+
+.add-on.mc-add-on {
+	display: table-cell;
+}
+
+.input-prepend .mc-input {
+	display: table-cell;
+	width: 100%;
+	border-left-style:none;
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Grocery List</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<!-- bootstraps -->
+		<link rel="stylesheet" href="css/reset.css" media="screen">
+		<link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" media="screen">
+		<link rel="stylesheet" href="css/fridgelist.css" media="screen">
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<form style="margin-bottom:-9px; width:100%;">
+			<fieldset>
+				<div class="input-prepend">
+					<span style="width:40px;" class="add-on mc-add-on"><i class="icon-shopping-cart"></i></span>
+					<input type="text" class="mc-input input-block-level" placeholder="Add an item...">
+				</div>
+			</fieldset>
+		</form>
+		<table id="groc-list" class="table table-striped table-hover table-condensed table-bordered">
+			<tbody>
+				<tr id="grocery-row">
+					<td id="check-cell">
+						<a href="#" class="btn btn-success"><i class="icon-white icon-ok"></i></a>
+					</td>
+					<td id="grocery-name">
+						Lemon
+					</td>
+					<td id="modify-cell">
+						<div class="btn-group">
+							<a href="#" class="btn"><i class="icon-pencil"></i></	a>
+							<a href="#" class="btn btn-danger"><i class="icon-white icon-remove"></i></a>
+						</div>
+					</td>
+				</tr>
+				<tr class="warning">
+					<td>
+						<a href="#" class="btn btn-success"><i class="icon-white icon-ok"></i></a>
+					</td>
+					<td id="grocery-name">
+						<input type="text" value="Pepper" class="input-block-level" style="margin:0px;">
+					</td>
+					<td>
+						<div class="btn-group">
+							<a href="#" class="btn btn-warning"><i class="icon-white icon-pencil"></i></	a>
+							<a href="#" class="btn btn-danger"><i class="icon-white icon-remove"></i></a>
+						</div>
+					</td>
+				</tr>
+				<tr class="error">
+					<td>
+						<a href="#" class="btn"><i class="icon-share"></i></a>
+					</td>
+					<td id="grocery-name">
+						<strike>Milk</strike>
+					</td>
+					<td>
+						<div class="btn-group">
+							<a href="#" class="btn"><i class="icon-pencil"></i></	a>
+							<a href="#" class="btn btn-danger"><i class="icon-white icon-remove"></i></a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
+
