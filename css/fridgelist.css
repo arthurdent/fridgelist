@@ -6,8 +6,12 @@
 }
 @media (min-width: 767px) {
 	body {
-		margin: 25px;
+		margin: 20px;
 	}
+}
+
+body {
+	font-size:24px;
 }
 
 .input-prepend {
@@ -16,28 +20,125 @@
 	margin-bottom:15px;
 }
 
-#grocery-row {
-}
-
-#grocery-name {
-	vertical-align:middle;
+.input-prepend .mc-input {
 	display: table-cell;
-}
-
-#check-cell {
-	width:40px;
-}
-
-#modify-cell {
-	width:80px;
+	width:100%;
+/*
+	border-left-style:none;
+*/
 }
 
 .add-on.mc-add-on {
 	display: table-cell;
 }
 
-.input-prepend .mc-input {
-	display: table-cell;
+input[type="text"] {
+	font-size:24px;
+	padding:0px 0px 0px 8px;
+	margin:0px;
+	height:36px;
 	width: 100%;
-	border-left-style:none;
+	box-sizing: border-box;
 }
+
+/* HAX HAX HAX HAX HAX
+input {
+}
+*/
+
+#list-button {
+	width: 52px;
+	height: 45px;
+}
+
+#add-item-form {
+
+	margin-bottom: -12px;
+	margin-left: 1px;
+	width: 100%;
+
+}
+
+#add-item-div {
+	width:100%;
+}
+
+::-webkit-input-placeholder { 
+	padding-top: 5px;
+}
+
+.table td {
+	vertical-align: middle;
+}
+
+#groc-list .checkbox-cell {
+	border-left: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+#groc-list .grocery-cell {
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+
+.grocery-row {
+}
+
+.grocery-cell {
+}
+
+.cb-button {
+	color: #666;
+	font-size: 16px;
+	border:none;
+	padding: 0px;
+	margin: 0px;
+	height: 50px;
+	width: 50px;
+}
+
+.list-button {
+	color: #fff;
+	font-size: 14px;
+	border:none;
+	padding: 0px;
+	margin: 0px;
+	height: 45px;
+	width: 50px;
+}
+
+.list-button .icon-large {
+	position: relative;
+	top:16px;
+}
+
+.cb-button .icon-large {
+	position: relative;
+	top: 16px;
+}
+
+.cb-unchecked, .cb-unchecked:link, .cb-unchecked:visited, .cb-unchecked:active,
+.cb-checked, .cb-checked:link, .cb-checked:visited, .cb-checked:active {
+	color:#ccc;
+	text-decoration:none;
+	padding-top:5px;
+	padding-left:5px;
+}
+
+.cb-unchecked:hover, .cb-checked:hover {
+	color:#fff;
+}
+
+.grocery-name {
+	font-size:24px;
+	padding: 3px 5px 3px 5px;
+}
+
+.table .checkbox-cell {
+	width: 50px;
+	padding: 0px;
+	background-color: #888;
+}
+
