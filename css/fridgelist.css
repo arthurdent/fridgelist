@@ -23,9 +23,6 @@ body {
 .input-prepend .mc-input {
 	display: table-cell;
 	width:100%;
-/*
-	border-left-style:none;
-*/
 }
 
 .add-on.mc-add-on {
@@ -38,29 +35,29 @@ input[type="text"] {
 	margin:0px;
 	height:36px;
 	width: 100%;
+	border: 0px;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
 
-/* HAX HAX HAX HAX HAX
-input {
+#add-item-input {
 }
-*/
+
+#add-item-form {
+	padding:0px;
+	margin:0px;
+}
 
 #list-button {
 	width: 52px;
 	height: 45px;
 }
 
-#add-item-form {
-
-	margin-bottom: -12px;
-	margin-left: 1px;
-	width: 100%;
-
-}
-
-#add-item-div {
-	width:100%;
+#groc-list .add-item-cell {
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	background-color:;
 }
 
 ::-webkit-input-placeholder { 
@@ -75,7 +72,13 @@ input {
 	border-left: 1px solid #ddd;
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
+	width: 50px;
+	padding: 0px;
+	background-color: #f5f5f5;
 }
+
+.check {left:2px;}
+.check-empty {left:0px;}
 
 #groc-list .grocery-cell {
 	border-top: 1px solid #ddd;
@@ -83,10 +86,9 @@ input {
 	border-right: 1px solid #ddd;
 }
 
-.grocery-row {
-}
-
-.grocery-cell {
+#groc-list .gc-checked {
+	color:#aaa;
+	background-color:#ecc;
 }
 
 .cb-button {
@@ -111,12 +113,12 @@ input {
 
 .list-button .icon-large {
 	position: relative;
-	top:16px;
+	top:15px;
 }
 
 .cb-button .icon-large {
 	position: relative;
-	top: 16px;
+	top: 17px;
 }
 
 .cb-unchecked, .cb-unchecked:link, .cb-unchecked:visited, .cb-unchecked:active,
@@ -134,11 +136,5 @@ input {
 .grocery-name {
 	font-size:24px;
 	padding: 3px 5px 3px 5px;
-}
-
-.table .checkbox-cell {
-	width: 50px;
-	padding: 0px;
-	background-color: #888;
 }
 
