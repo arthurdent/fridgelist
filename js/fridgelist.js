@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 	var editstate = false;
 
+	// Normal vs Edit mode.
   $('.list-button').on('click',function(){
 
 		if (!editstate) {
@@ -30,29 +31,7 @@ $(document).ready(function(){
 
   });
 
-	$('.grocery-row').on('click', function() {
-		checkbox = $(this).children('.checkbox-cell').children('.cb-button').children('i');
-
-		if (checkbox.hasClass('icon-trash')) {
-			$(this).remove();
-		} else {
-			if (checkbox.hasClass('check-empty')) {
-				// Check
-				checkbox.removeClass('icon-check-empty');
-				checkbox.addClass('icon-check');
-				checkbox.removeClass('check-empty');
-				$(this).children('.grocery-cell').addClass('gc-checked');
-			} else {
-				// Uncheck
-				checkbox.addClass('check-empty');
-				checkbox.removeClass('icon-check');
-				checkbox.addClass('icon-check-empty');
-				$(this).children('.grocery-cell').removeClass('gc-checked');
-			}
-
-		}
-	});
-
+	// Add item
 	$('#add-item-form').submit(function() {
 		$('#grocery-list').append('<tr class="grocery-row"><td class="checkbox-cell"><a href="#" class="btn cb-button"><i class="icon-large check check-empty icon-check-empty"></i></a></td><td class="grocery-cell"><div class="grocery-name">' + escapeHTML($(this).children('#add-item-input').val()) + '</div></td></tr>');				
 
@@ -62,5 +41,29 @@ $(document).ready(function(){
 
 	function escapeHTML(html) {
 		return html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+	}
+});
+
+// Check, uncheck, delete
+$(document).on('click', '.grocery-row', function() {
+	checkbox = $(this).children('.checkbox-cell').children('.cb-button').children('i');
+
+	if (checkbox.hasClass('icon-trash')) {
+		$(this).remove();
+	} else {
+		if (checkbox.hasClass('check-empty')) {
+			// Check
+			checkbox.removeClass('icon-check-empty');
+			checkbox.addClass('icon-check');
+			checkbox.removeClass('check-empty');
+			$(this).children('.grocery-cell').addClass('gc-checked');
+		} else {
+			// Uncheck
+			checkbox.addClass('check-empty');
+			checkbox.removeClass('icon-check');
+			checkbox.addClass('icon-check-empty');
+			$(this).children('.grocery-cell').removeClass('gc-checked');
+		}
+
 	}
 });
