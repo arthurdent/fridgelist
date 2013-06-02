@@ -57,6 +57,7 @@ $(document).ready(function(){
 		$('#grocery-list').append('<tr class="grocery-row"><td class="checkbox-cell"><a href="#" class="btn cb-button"><i class="icon-large check check-empty icon-check-empty"></i></a></td><td class="grocery-cell"><div class="grocery-name">' + escapeHTML($(this).children('#add-item-input').val()) + '</div></td></tr>');				
 
 		$(this).children('#add-item-input').val('');
+		return false;
 	});
 
 	function escapeHTML(html) {
