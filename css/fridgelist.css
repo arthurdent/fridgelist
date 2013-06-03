@@ -1,3 +1,5 @@
+/* ===== Device Formatting ===== */
+
 @media (max-width: 767px) {
 	body {
 		margin:3px;
@@ -12,22 +14,43 @@
 
 body {
 	font-size:24px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
 }
 
-.input-prepend {
-	display:table;
-	width:100%;
-	margin-bottom:15px;
+/* ===== Table ===== */
+
+.table {
+	border: none;
 }
 
-.input-prepend .mc-input {
-	display: table-cell;
-	width:100%;
+.table td {
+	vertical-align: middle;
 }
 
-.add-on.mc-add-on {
-	display: table-cell;
+/* ===== List Button ===== */
+
+#list-button {
+	color: #fff;
+	font-size: 14px;
+	border: none;
+	padding: 0px;
+	margin: 0px;
+	height: 45px;
+	width: 50px;
 }
+
+#list-button .icon-large {
+	position: relative;
+	top:15px;
+}
+
+/* ===== Input (Add Item) ===== */
 
 input[type="text"] {
 	font-size:24px;
@@ -40,7 +63,12 @@ input[type="text"] {
 	-moz-box-sizing: border-box;
 }
 
-#add-item-input {
+#add-item-input {}
+
+#item-table .add-item-cell {
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
 }
 
 #add-item-form {
@@ -48,27 +76,13 @@ input[type="text"] {
 	margin:0px;
 }
 
-#list-button {
-	width: 52px;
-	height: 45px;
-}
-
-#groc-list .add-item-cell {
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	border-right: 1px solid #ddd;
-	background-color:;
-}
-
 ::-webkit-input-placeholder { 
 	padding-top: 5px;
 }
 
-.table td {
-	vertical-align: middle;
-}
+/* ===== Checkbox ===== */
 
-#groc-list .checkbox-cell {
+#item-table .checkbox-cell {
 	border-left: 1px solid #ddd;
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
@@ -80,17 +94,6 @@ input[type="text"] {
 .check {left:2px;}
 .check-empty {left:0px;}
 
-#groc-list .grocery-cell {
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	border-right: 1px solid #ddd;
-}
-
-#groc-list .gc-checked {
-	color:#aaa;
-	background-color:#ecc;
-}
-
 .cb-button {
 	color: #666;
 	font-size: 16px;
@@ -99,21 +102,6 @@ input[type="text"] {
 	margin: 0px;
 	height: 50px;
 	width: 50px;
-}
-
-.list-button {
-	color: #fff;
-	font-size: 14px;
-	border:none;
-	padding: 0px;
-	margin: 0px;
-	height: 45px;
-	width: 50px;
-}
-
-.list-button .icon-large {
-	position: relative;
-	top:15px;
 }
 
 .cb-button .icon-large {
@@ -133,8 +121,22 @@ input[type="text"] {
 	color:#fff;
 }
 
+/* ===== Item List ===== */
+
+#item-table .grocery-cell {
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+
+#item-table .gc-checked {
+	color:#aaa;
+	background-color:#edd;
+	text-decoration: line-through;
+}
+
 .grocery-name {
+	text-decoration:inherit;
 	font-size:24px;
 	padding: 3px 5px 3px 5px;
 }
-

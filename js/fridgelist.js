@@ -1,44 +1,46 @@
-// Save everything.
+$(document).ready(function(){
+	/* ===== Globals ===== */
 
-// Save data to HTML5 Local Storage
-function saveLocal() {
-	var cells = new Object();
+	editmode = false;
 
-	$('#grocery-list tr').each(function(i,data) {
-		var checked = !$(data).children('.checkbox-cell').children('a').children('i').hasClass('check-empty');
-		var listitem = $.trim($(data).children('.grocery-cell').children('.grocery-name').text());
+	/* Save HTML5 Local Storage */
+	function saveLocal() {
+		var cells = new Object();
 
-		cells[listitem] = checked;
+		$('#grocery-list tr').each(function(i,data) {
+			var checked = !$(data).children('.checkbox-cell').children('a').children('i').hasClass('check-empty');
+			var listitem = $.trim($(data).children('.grocery-cell').children('.grocery-name').text());
 
-	});
-	
-	saveString = JSON.stringify(cells);
+			cells[listitem] = checked;
 
-	localStorage.setItem('cells', saveString);
+		});
 
-	//console.log(saveString);
-}
+		saveString = JSON.stringify(cells);
 
-// Restore HTML5 Local Storage
-function restoreLocal() {
+		localStorage.setItem('cells', saveString);
 
-	cells = JSON.parse(localStorage.getItem('cells'));
-
-	for (var item in cells) {
-		if (cells.hasOwnProperty(item)) {
-			addItem(cells[item], item);
-			//console.log(item + " -> " + cells[item]);
-		}
 	}
 
-}
+	/* Restore HTML5 Local Storage */
+	function restoreLocal() {
 
-// Escape HTML strings
-function escapeHTML(html) {
-	return html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
+		cells = JSON.parse(localStorage.getItem('cells'));
 
-function addItem(checkedBool, listitem) {
+		for (var item in cells) {
+			if (cells.hasOwnProperty(item)) {
+				addItem(cells[item], item);
+			}
+		}
+
+	}
+
+	/* Escape HTML Strings */
+	function escapeHTML(html) {
+		return html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+	}
+
+	/* Add an item to the list */
+	function addItem(checkedBool, listitem) {
 
 		var checked = "icon-check";
 		var gcchecked = "gc-checked";
@@ -48,86 +50,106 @@ function addItem(checkedBool, listitem) {
 			gcchecked = "";
 		}
 
-		$('#grocery-list').append('<tr class="grocery-row"><td class="checkbox-cell"><a href="#" class="btn cb-button"><i class="icon-large check ' + checked + '"></i></a></td><td class="grocery-cell ' + gcchecked + '"><div class="grocery-name">' + listitem + '</div></td></tr>');
+		$('#grocery-list').prepend('<tr class="grocery-row"><td class="checkbox-cell"><a href="#" class="btn cb-button"><i class="icon-large check ' + checked + '"></i></a></td><td class="grocery-cell ' + gcchecked + '"><div class="grocery-name">' + listitem + '</div></td></tr>');
 
+	}
 
-}
+	/* Delete an item from the list */
+	function removeItem(item) {
+		item.remove();
+	}
 
-$(document).ready(function(){
+	/* Enter edit mode */
+	function editMode() {
 
-	restoreLocal();
+		$('#list-button').removeClass('btn-info');
+		$('#list-button').addClass('btn-warning');
+		$('#list-button').children('i').removeClass('icon-th-list');
+		$('#list-button').children('i').addClass('icon-chevron-left');
+
+		$('.check').removeClass('icon-check');
+		$('.check').addClass('icon-trash');
+		$('.check-empty').removeClass('icon-check-empty');
+
+		$('#add-item-input').attr("disabled", true);
+		$('#add-item-input').val('Return to list mode...');
+
+	}
+
+	/* Enter Normal Mode */
+	function normalMode() {
+
+		$('#list-button').addClass('btn-info');
+		$('#list-button').removeClass('btn-warning');
+		$('#list-button').children('i').addClass('icon-th-list');
+		$('#list-button').children('i').removeClass('icon-chevron-left');
+
+		$('.check').addClass('icon-check');
+		$('.check').removeClass('icon-trash');
+		$('.check-empty').addClass('icon-check-empty');
+
+		$('#add-item-input').attr("disabled", false);
+		$('#add-item-input').val('');
+
+	}
+
 
 	// Normal vs Edit mode.
-	var editstate = false;
-  $('.list-button').on('click',function(){
 
-		if (!editstate) {
-			// Edit Mode
-			$(this).removeClass('btn-info');
-			$(this).addClass('btn-warning');
-			$(this).children('i').removeClass('icon-th-list');
-			$(this).children('i').addClass('icon-chevron-left');
-			$('.check').removeClass('icon-check');
-			$('.check-empty').removeClass('icon-check-empty');
-			$('.check').addClass('icon-trash');
-			$('.check-empty').addClass('icon-trash');
-			$('#add-item-input').attr("disabled", true);
-			$('#add-item-input').val('Return to list mode...');
+	$('#list-button').on('click',function(){
+
+		if (!editmode) {
+			editMode();
 		} else {
-			// Normal Mode
-			$(this).removeClass('btn-warning');
-			$(this).addClass('btn-info');
-			$(this).children('i').removeClass('icon-chevron-left');
-			$(this).children('i').addClass('icon-th-list');
-			$('.check').removeClass('icon-trash');
-			$('.check-empty').removeClass('icon-trash');
-			$('.check').addClass('icon-check');
-			$('.check-empty').addClass('icon-check-empty');
-			$('#add-item-input').attr("disabled", false);
-			$('#add-item-input').val('');
+			normalMode();
 		}
 
-		editstate = !editstate;
+		editmode = !editmode;
 
-  });
+	});
 
 	// Submit item
 	$('#add-item-form').submit(function() {
 
-		addItem(false, escapeHTML($(this).children('#add-item-input').val()));
+		addItem(false, escapeHTML($('#add-item-input').val()));
 
-		$(this).children('#add-item-input').val('');
-		
+		//$('#add-item-input').val('');
+		$('input[id=add-item-input]').val('');
+
 		saveLocal(); // Save to HTML5 local storage.
 
 		return false; // Disable refresh
 
 	});
 
-});
 
-// Check, uncheck, delete
-$(document).on('click', '.grocery-row', function() {
-	checkbox = $(this).children('.checkbox-cell').children('.cb-button').children('i');
+	// Check, uncheck, delete
+	$(document).on('click', '.grocery-row', function() {
+		checkbox = $(this).children('.checkbox-cell').children('.cb-button').children('i');
+		listitem = $(this).children('.grocery-cell');
 
-	if (checkbox.hasClass('icon-trash')) {
-		$(this).remove();
-	} else {
-		if (checkbox.hasClass('check-empty')) {
-			// Check
-			checkbox.removeClass('icon-check-empty');
-			checkbox.addClass('icon-check');
-			checkbox.removeClass('check-empty');
-			$(this).children('.grocery-cell').addClass('gc-checked');
+		if (checkbox.hasClass('icon-trash')) {
+			removeItem($(this));
 		} else {
-			// Uncheck
-			checkbox.addClass('check-empty');
-			checkbox.removeClass('icon-check');
-			checkbox.addClass('icon-check-empty');
-			$(this).children('.grocery-cell').removeClass('gc-checked');
-		}
+			if (checkbox.hasClass('check-empty')) {
+				// Check
+				checkbox.removeClass('icon-check-empty');
+				checkbox.addClass('icon-check');
+				checkbox.removeClass('check-empty');
+				$(this).children('.grocery-cell').addClass('gc-checked');
+			} else {
+				// Uncheck
+				checkbox.addClass('check-empty');
+				checkbox.removeClass('icon-check');
+				checkbox.addClass('icon-check-empty');
+				$(this).children('.grocery-cell').removeClass('gc-checked');
+			}
 
-	}
-	saveLocal(); // Save to HTML5 local storage.
+		}
+		saveLocal(); // Save to HTML5 local storage.
+
+	});
+
+	restoreLocal();
 
 });

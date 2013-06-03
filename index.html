@@ -4,6 +4,7 @@
 	<head>
 
 		<title>Grocery List</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<!-- bootstraps -->
 		<link rel="stylesheet" href="css/reset.css" media="screen">
@@ -11,6 +12,7 @@
 		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" media="screen">
 		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" media="screen">
 		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.color.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/fridgelist.js"></script>
 		<link rel="stylesheet" href="css/fridgelist.css" media="screen">
@@ -18,17 +20,17 @@
 	</head>
 	<body>
 
-		<table id="groc-list" class="table table-condensed">
+		<table id="item-table" class="table table-condensed">
 
 			<thead>
 				<tr>
 					<td class="checkbox-cell">
-						<a href="#" class="btn btn-info list-button">
+						<a href="#" id="list-button" class="btn btn-info">
 							<i class="icon-large icon-th-list"></i>
 						</a>
 					</td>
 					<td class="add-item-cell">
-						<form id="add-item-form" action="">
+						<form id="add-item-form" action="" data-ajax="false">
 							<input type="text" id="add-item-input" placeholder="Add an item..." />
 						</form>
 					</td>
@@ -37,42 +39,7 @@
 			</thead>
 
 			<tbody id="grocery-list">
-<!--
-				<tr class="grocery-row">
-					<td class="checkbox-cell">
-						<a href="#" class="btn cb-button">
-							<i class="icon-large check check-empty icon-check-empty"></i>
-						</a>
-					</td>
-					<td class="grocery-cell">
-						<div class="grocery-name">
-							Eggs
-						</div>
-					</td>
-				</tr>
-
-				<tr class="grocery-row">
-					<td class="checkbox-cell">
-						<a href="#" class="btn cb-button">
-							<i class="icon-large check check-empty icon-check-empty"></i>
-						</a>
-					</td>
-					<td class="grocery-cell">
-						<div class="grocery-name">Bread</div>
-					</td>
-				</tr>
-
-				<tr class="grocery-row">
-					<td class="checkbox-cell">
-						<a href="#" class="btn cb-button">
-							<i class="icon-large check check-empty icon-check-empty"></i>
-						</a>
-					</td>
-					<td class="grocery-cell">
-						<div class="grocery-name">Milk</div>
-					</td>
-				</tr>
-				-->
+				<!-- Stuff goes here ;) -->
 			</tbody>
 		</table>
 
