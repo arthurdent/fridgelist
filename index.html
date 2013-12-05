@@ -20,28 +20,33 @@
 	</head>
 	<body>
 
-		<table id="item-table" class="table table-condensed">
-
-			<thead>
-				<tr>
-					<td class="checkbox-cell">
-						<a href="#" id="list-button" class="btn btn-info">
-							<i class="icon-large icon-th-list"></i>
-						</a>
-					</td>
-					<td class="add-item-cell">
-						<form id="add-item-form" action="" data-ajax="false">
-							<input type="text" id="add-item-input" placeholder="Add an item..." />
-						</form>
-					</td>
-				</tr>
-				<tr><td></td><td></td></tr>
-			</thead>
-
-			<tbody id="grocery-list">
-				<!-- Stuff goes here ;) -->
-			</tbody>
-		</table>
+		<div id="fl-header">
+			<div id="item-tools-button">
+				<a href="#" id="list-button" class="btn btn-info">
+					<i class="icon-large icon-th-list"></i>
+				</a>
+			</div>
+			<div id="item-entry-textbox">
+				<form id="add-item-form" action="" data-ajax="false">
+					<input type="text" id="add-item-input" placeholder="Add an item..." />
+				</form>
+			</div>
+		</div>
+	
+		<div id="item-list">
+			<!--
+			<div class="item-container">
+				<div class="item-button">
+					<a href="#" class="btn cb-button">
+						<i class="icon-large icon-check-empty"></i>
+					</a>
+				</div>
+				<span class="item-name">
+					It's a thing I need to buy!
+				</span>
+			</div>
+			-->
+		</div>
 
 	</body>
 </html>

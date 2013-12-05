@@ -1,18 +1,21 @@
 $(document).ready(function(){
 	/* ===== Globals ===== */
 
-	editmode = false;
+	editor_menu = false;
+	normalMode();
+	restoreLocal();
 
 	/* Save HTML5 Local Storage */
 	function saveLocal() {
 		var cells = new Object();
 
-		$('#grocery-list tr').each(function(i,data) {
-			var checked = !$(data).children('.checkbox-cell').children('a').children('i').hasClass('check-empty');
-			var listitem = $.trim($(data).children('.grocery-cell').children('.grocery-name').text());
+		$('#item-list .item-container').each(function(i,data) {
+
+			var checked = !$(data).children('.item-button').children('a').children('i').hasClass('check-empty');
+			var listitem = $.trim($( this ).children('.item-name').text());
 
 			cells[listitem] = checked;
-
+			
 		});
 
 		saveString = JSON.stringify(cells);
@@ -28,9 +31,18 @@ $(document).ready(function(){
 
 		for (var item in cells) {
 			if (cells.hasOwnProperty(item)) {
-				addItem(cells[item], item);
+				restoreItem(cells[item], item);
 			}
 		}
+	}
+	
+	/* Restore item */
+	function restoreItem(checkedBool, listitem) {
+
+		checked = checkedBool ? "icon-check" : "check-empty icon-check-empty";
+		crossthru = checkedBool ? "gc-checked" : "";
+
+		$('#item-list').append('<div class="item-container ' + crossthru + '"><div class="item-button"><a href="#" class="btn cb-button"><i class="icon-large check ' + checked + '"></i></a></div><span class="item-name">' + listitem + '</span>');
 
 	}
 
@@ -38,19 +50,19 @@ $(document).ready(function(){
 	function escapeHTML(html) {
 		return html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 	}
+	
+	/* Normal vs Edit mode. */
+	$('#list-button').on('click', function(){
+
+		editor_menu = !editor_menu ? editMode() : normalMode();
+
+	});
+
 
 	/* Add an item to the list */
-	function addItem(checkedBool, listitem) {
+	function addItem(item_name) {
 
-		var checked = "icon-check";
-		var gcchecked = "gc-checked";
-
-		if (checkedBool == false) {
-			checked = "check-empty icon-check-empty";
-			gcchecked = "";
-		}
-
-		$('#grocery-list').prepend('<tr class="grocery-row"><td class="checkbox-cell"><a href="#" class="btn cb-button"><i class="icon-large check ' + checked + '"></i></a></td><td class="grocery-cell ' + gcchecked + '"><div class="grocery-name">' + listitem + '</div></td></tr>');
+		$('#item-list').prepend('<div class="item-container"><div class="item-button"><a href="#" class="btn cb-button"><i class="icon-large check check-empty icon-check-empty"></i></a></div><span class="item-name">' + item_name + '</span>');
 
 	}
 
@@ -74,6 +86,8 @@ $(document).ready(function(){
 		$('#add-item-input').attr("disabled", true);
 		$('#add-item-input').val('Return to list mode...');
 
+		return true;
+
 	}
 
 	/* Enter Normal Mode */
@@ -91,30 +105,25 @@ $(document).ready(function(){
 		$('#add-item-input').attr("disabled", false);
 		$('#add-item-input').val('');
 
+		return false;
+
 	}
-
-
-	// Normal vs Edit mode.
-
-	$('#list-button').on('click',function(){
-
-		if (!editmode) {
-			editMode();
-		} else {
-			normalMode();
-		}
-
-		editmode = !editmode;
-
-	});
 
 	// Submit item
 	$('#add-item-form').submit(function() {
 
-		addItem(false, escapeHTML($('#add-item-input').val()));
+		if ($('#add-item-input').val() == '') {
+			return false;
+		}
 
-		//$('#add-item-input').val('');
-		$('input[id=add-item-input]').val('');
+		addItem(escapeHTML($('#add-item-input').val()));
+
+		// Clear input box
+		$('input[id=add-item-input]').val("");
+
+		// Hack to fix firefox for android
+		$('#add-item-input').blur();
+		$('#add-item-input').focus();
 
 		saveLocal(); // Save to HTML5 local storage.
 
@@ -124,9 +133,9 @@ $(document).ready(function(){
 
 
 	// Check, uncheck, delete
-	$(document).on('click', '.grocery-row', function() {
-		checkbox = $(this).children('.checkbox-cell').children('.cb-button').children('i');
-		listitem = $(this).children('.grocery-cell');
+	$(document).on('click', '.item-container', function() {
+
+		checkbox = $(this).children('.item-button').children('.cb-button').children('i');
 
 		if (checkbox.hasClass('icon-trash')) {
 			removeItem($(this));
@@ -136,20 +145,18 @@ $(document).ready(function(){
 				checkbox.removeClass('icon-check-empty');
 				checkbox.addClass('icon-check');
 				checkbox.removeClass('check-empty');
-				$(this).children('.grocery-cell').addClass('gc-checked');
+				$(this).addClass('gc-checked');
 			} else {
 				// Uncheck
 				checkbox.addClass('check-empty');
 				checkbox.removeClass('icon-check');
 				checkbox.addClass('icon-check-empty');
-				$(this).children('.grocery-cell').removeClass('gc-checked');
+				$(this).removeClass('gc-checked');
 			}
-
 		}
+
 		saveLocal(); // Save to HTML5 local storage.
 
 	});
-
-	restoreLocal();
 
 });
